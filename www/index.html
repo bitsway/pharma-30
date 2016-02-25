@@ -51,7 +51,7 @@
 				<ul data-role="listview">                    
                     <br><br>
                     <div style="background:#008A8A; height:1px"></div>
-                    <li ><div align="center" ><a href="#login" ><img src="sync.png"></a></div></li> 
+                    <li ><a href="#login" ><img src="sync.png"></a></li> 
                     <div style="background:#008A8A; height:1px"></div>
                 </ul>
                 
@@ -1295,11 +1295,14 @@
 						<td><input id="date_to_doc" name="date_to_doc" type="date" data-role="date" ></td>
 					  </tr>
 					</table>
+                    <font style="color:#F00; font-size:12px">* detail report only reflect From date </font>
 
 				<br/>
 				<div id="doctor_report_button"> </div>
-				</br></br>
+                </br>
+                <div id="prescription_report_button"> </div>
 				
+				</br></br>
 				<div id="order_report_button"> </div>
             </div><!--/cont-->
 			
@@ -1448,6 +1451,74 @@
 		 </div><!--/page-->
 
 <!-- ===================== today status Page================== -->
+<!--==================page_report Prescription==================================-->
+
+		<div data-theme="c" data-role="page" id="page_report_prescription">
+            <div data-theme="c" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext" onClick="clear_mgs()"><img src="menu.png"></a>
+            <a data-role="button" data-rel="back"  data-iconpos="left" class="ui-btn-right"><img src="back.png"></a>
+                <h3><div id="report_header_prescription"> Prescription Summary</div></h3>
+            </div>
+			
+            <div data-role="content">			
+				<div id="myerror_s_report_prescription" style="color:#C00"></div>               
+				<ul data-inset="true" data-role="listview">
+					
+					<li>
+						
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td><div id="report_mpo_prescription">  </div></td>
+                          </tr>
+                           <tr>
+                            <td><div id="report_market_prescription" >  </div></td>
+                           </tr>
+                          <tr>
+                            <td><div id="date_f_prescription"> </div></td>
+							</tr>
+							  <tr>	
+								<td> <div id="date_t_prescription">  </div></td>
+								
+								
+							  </tr>
+							</table>
+						
+												
+					</li>
+                  <div style='background-color:#00BFBF; height:5px; font-size:5px'></div>
+					<li>
+					  			
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+							  <tr>
+								
+								<td><div id="visit_count_prescription">  </div></td>
+								 </tr>
+								 <tr>
+								<td><div id="visit_withAtt_prescription">  </div></td>
+								 </tr>
+								 <tr>
+								<td><div id="visit_withoutAtt_prescription">  </div></td>
+							  </tr>
+							</table>
+		
+					</li>
+						
+											
+				</ul>
+				
+				
+				<div id="rep_detail_prescription" style="color:#000066; font-size:10px; width:100%"></div>
+				
+				
+            </div><!--/cont-->
+			
+			<div data-theme="c" data-role="footer" data-position="fixed">
+			
+			</div>
+			
+		 </div><!--/page-->
+
+<!-- ===================== today status Page================== -->
 		<!--/page-->
         
         
@@ -1527,16 +1598,16 @@
 			
 			<div id="delivery_date_div">
                 <span style=" color:#009191; ">Delivery Date</span>
-				<input name="delivery_date" id="delivery_date" placeholder="Date" value="" type="date" placeholder="Delivery Date">
+				<input name="delivery_date" id="delivery_date"  value="" type="date" placeholder="Delivery Date">
 			</div>
             <div id="collection_date_div">
                 <span style=" color:#009191; ">Collection Date</span>
-				<input name="collection_date" id="collection_date" placeholder="Date" value="" type="date" placeholder="Delivery Date">
+				<input name="collection_date" id="collection_date"  value="" type="date" placeholder="Delivery Date">
 			</div>
             
 			<div id="payment_date_div">
             	<span style=" color:#009191; ">Payment Date</span>
-				<input name="payment_date" id="payment_date" placeholder="Date" value="" type="date" placeholder="Payment Date">
+				<input name="payment_date" id="payment_date"  value="" type="date" placeholder="Payment Date">
 			</div>
 			
             
