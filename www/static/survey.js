@@ -521,6 +521,7 @@ function check_user() {
 		$("#wait_image_login").show();
 		
 		//----
+		//$("#error_login").html(apipath_base_photo_dm);
 		$.ajax({
 			 type: 'POST',
 			 url: apipath_base_photo_dm,
@@ -563,7 +564,7 @@ function check_user() {
 							localStorage.user_pass=user_pass;   		
 							localStorage.synced='NO'
 							
-							//$("#error_login").html(localStorage.base_url+'check_user?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+							//$("#error_login").html(localStorage.base_url+'check_user_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 							//http://127.0.0.1:8000/lscmreporting/syncmobile/check_user?cid=LSCRM&rep_id=1001&rep_pass=123&synccode=
 							
 							$.ajax({
@@ -618,8 +619,8 @@ function check_user() {
 													localStorage.payment_date_flag=resultArray[21];
 													localStorage.payment_mode_flag=resultArray[22];
 													localStorage.collection_date_flag=resultArray[23];
-													//alert (localStorage.delivery_date);
-
+													
+													
 												
 												//	==============Set menu start================\
 												
@@ -682,7 +683,8 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 															 
 															
 														
-									//	alert (localStorage.doctor_report_button);			
+									//	alert (localStorage.doctor_report_button);	
+										
 													if (doctor_report=="Yes"){
 														
 										localStorage.doctor_report_button='<a data-role="button" onClick="summary_report_doctor();" >DCR Count</a><a data-role="button" onClick="detail_report_doctor()" >DCR Detail</a>'
@@ -707,7 +709,7 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 														
 													
 													
-													var product_tbl_doc_campaign='<ul id="campaign_combo_id_lv" data-role="listview"  data-filter="true" data-input="#campaign_combo_id"  > ';campaign_combo_id_lv
+													var product_tbl_doc_campaign='<ul id="campaign_combo_id_lv" data-role="listview"  data-filter="true" data-input="#campaign_combo_id"  > ';
 													
 													
 													
@@ -724,7 +726,7 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 														var product_price=productArray2[2];
 														
 														var product_qty='';																		
-
+														
 														product_tbl_order=product_tbl_order+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input class="orderProduct" maxlength="4" onBlur="getOrderData_keyup(\''+product_id2+'\')" type="number" id="order_qty'+product_id2+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id2+'" value="'+product_id2+'" ><input type="hidden" id="order_price'+product_id2+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id2.toUpperCase()+'" value="'+product_name2.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ product_id2 +'" onClick="tr_item(\''+product_id2+'\')" >'+ product_name2.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>';
 														//------------ Doctor Campaign Item list
 														$("#error_login").html('Processing Product List....');
