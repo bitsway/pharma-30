@@ -72,7 +72,7 @@ function onSuccess(position) {
 } 
 function onError(error) {
 	
-	//alert("Error while retrieving current position. Error code: " + error.code + ",Message: " + error.message);;
+	alert("Error while retrieving current position. Error code: " + error.code + ",Message: " + error.message);;
 	
 	//alert(error.code);;
 	localStorage.location_error=error.code
@@ -89,10 +89,13 @@ function onError(error) {
 	//localStorage.location_detail='';
 	if (localStorage.location_error==2){
 		$("#checkLocation").html(' <font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
+		$("#checkLocationProfileUpdate").html(' <font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
+		$("#checkLocation_doc").html(' <font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
 		//location_error=1
 	}else{
 	$("#checkLocation").html('Location not found. Last Location will submit.');
 	$("#checkLocationProfileUpdate").html('Location not found. Last Location will submit.');
+	$("#checkLocation_doc").html('Location not found. Last Location will submit.');
 	}
 	
 	
@@ -100,7 +103,7 @@ function onError(error) {
 	$("#visit_submit").show();
 	$("#btn_location").hide();
 	
-	$("#checkLocation_doc").html('Location not found. Last Location will submit.');
+	
 	$("#wait_image_visit_submit_doc").hide();
 	$("#visit_submit_doc").show();
 	$("#btn_location_doc").hide();
