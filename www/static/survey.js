@@ -23,7 +23,9 @@ function getLocationInfo() { //location
 	$("#checkLocation_doc").html('');
 	
 	var options = { enableHighAccuracy: true, timeout:15000};
+	//var options = { enableHighAccuracy: true, timeout:1000};
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+	
 }
 
 // onSuccess Geolocationshom
@@ -61,19 +63,118 @@ function onSuccess(position) {
 	$("#btn_location_doc").hide();
 	
 	codeLatLng(position.coords.latitude, position.coords.longitude)
+	localStorage.location_error=''
+	
+	
+	
 	
 	
 } 
 function onError(error) {
 	
-	alert (error);
+	//alert("Error while retrieving current position. Error code: " + error.code + ",Message: " + error.message);;
+	
+	//alert(error.code);;
+	localStorage.location_error=error.code
+	
+	
+	
+	//alert (localStorage.location_error)
 	
 	$("#lat").val(0);
 	$("#longitude").val(0);
 	
 	$("#lat_p").val(0);
 	$("#long_p").val(0);
-	localStorage.location_detail='';
+	//localStorage.location_detail='';
+	if (localStorage.location_error==2){
+		$("#checkLocation").html(' <font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
+		//location_error=1
+	}else{
+	$("#checkLocation").html('Location not found. Last Location will submit.');
+	$("#checkLocationProfileUpdate").html('Location not found. Last Location will submit.');
+	}
+	
+	
+	$("#wait_image_visit_submit").hide();
+	$("#visit_submit").show();
+	$("#btn_location").hide();
+	
+	$("#checkLocation_doc").html('Location not found. Last Location will submit.');
+	$("#wait_image_visit_submit_doc").hide();
+	$("#visit_submit_doc").show();
+	$("#btn_location_doc").hide();
+}
+
+
+//==Reload Location
+function getLocationInfo_ready() { //location
+	$("#wait_image_visit_submit").show()
+	$("#visit_submit").hide();
+	$("#btn_location").hide();
+	
+	$("#checkLocation").html(''); 
+	$("#checkLocationProfileUpdate").html('');
+	
+	
+	$("#wait_image_visit_submit_doc").show()
+	$("#visit_submit_doc").hide();
+	$("#btn_location_doc").hide();
+	
+	$("#checkLocation_doc").html('');
+	
+	var options = { enableHighAccuracy: true, timeout:30000};
+	navigator.geolocation.getCurrentPosition(onSuccess_ready, onError_ready, options);
+}
+
+// onSuccess Geolocationshom
+
+function onSuccess_ready(position) {
+	$("#lat").val(position.coords.latitude);
+	$("#longitude").val(position.coords.longitude);
+	
+	$("#lat_p").val(position.coords.latitude);
+	$("#long_p").val(position.coords.longitude);
+	
+	
+	localStorage.latitude=position.coords.latitude
+	localStorage.longitude=position.coords.longitude
+	
+	
+	
+	$("#errorChkVSubmit").html('');
+	$("#errorConfiProfileUpdate").html('');
+	$("#errorChkVSubmit_doc").html('');
+	
+	
+	$("#checkLocation").html('Location Confirmed'); 
+	$("#checkLocationProfileUpdate").html('Location Confirmed');
+		
+	
+	$("#wait_image_visit_submit").hide();
+	$("#visit_submit").show();
+	$("#btn_location").hide();
+	
+	$("#checkLocation_doc").html('Location Confirmed'); 
+
+	$("#wait_image_visit_submit_doc").hide();
+	$("#visit_submit_doc").show();
+	$("#btn_location_doc").hide();
+	
+	codeLatLng(position.coords.latitude, position.coords.longitude)
+	
+	
+} 
+function onError_ready(error) {
+	
+	//alert (error);
+	
+	$("#lat").val(0);
+	$("#longitude").val(0);
+	
+	$("#lat_p").val(0);
+	$("#long_p").val(0);
+	//localStorage.location_detail='';
 	
 	$("#checkLocation").html('Location not found. Last Location will submit.');
 	$("#checkLocationProfileUpdate").html('Location not found. Last Location will submit.');
@@ -81,14 +182,18 @@ function onError(error) {
 	
 	
 	$("#wait_image_visit_submit").hide();
-	$("#visit_submit").hide();
-	$("#btn_location").show();
+	$("#visit_submit").show();
+	$("#btn_location").hide();
 	
 	$("#checkLocation_doc").html('Location not found. Last Location will submit.');
 	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").hide();
-	$("#btn_location_doc").show();
+	$("#visit_submit_doc").show();
+	$("#btn_location_doc").hide();
 }
+
+
+
+
 
 
 //========================================
@@ -1284,7 +1389,7 @@ function marketRetailerNextLV(lvalue) {
 function marketRetailerNext() {
 	$("#lat").val(0);
 	$("#longitude").val(0);
-	localStorage.location_detail=''
+	//localStorage.location_detail=''
 	$("#err_m_retailer_next").text("");
 	visit_client=$("#unscheduled_m_client_combo_id").val();		
 
@@ -1532,7 +1637,7 @@ function replace_special_char(string_value){
 
 function lscVisitSubmit(){	
 	$("#errorChkVSubmit").text("");
-	//alert (localStorage.visit_client);
+	//alert (localStorage.location_detail)
 	var visitClientId=localStorage.visit_client
 	var visit_type=localStorage.visit_type
 	var scheduled_date=localStorage.scheduled_date
@@ -1634,140 +1739,150 @@ function lscVisitSubmit(){
 						var imageName=localStorage.user_id+'_'+now.toString()+'.jpg';
 						
 						
-						if (lat=='' || lat==0 || longitude=='' || longitude==0){
-							lat=localStorage.latitude
-							longitude=localStorage.latitude
+						if (lat=='' || lat==0 || longitude=='' || longitude==0 || localStorage.location_error==2){
+							
+								lat=localStorage.latitude
+								longitude=localStorage.latitude
+								localStorage.location_detail="LastLocation-"+localStorage.location_detail;
+								location_error=0;
+						
 							
 							
 							//$("#errorChkVSubmit").html('Location not Confirmed');	
 							//$("#btn_location").show();	
 							//$("#visit_submit").hide();	
-						}//else{
+						}else{
 							
-							if (visitClientId=='' || visitClientId==undefined){
-								$("#errorChkVSubmit").html('Invalid Client');		
-							}else{
-								if(visit_type=='' || visit_type==undefined){
-									$("#errorChkVSubmit").html('Invalid Visit Type');
-								}else{
-									$("#visit_submit").hide();
-									$("#wait_image_visit_submit").show();		
-								//	alert (localStorage.productOrderStr);
-								//	$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&location_detail='+localStorage.location_detail+'&version=p1')
-									// ajax-------
-									//alert (localStorage.payment_mode);
-									$.ajax({
-										 type: 'POST',
-										 url: localStorage.base_url+'visitSubmit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&location_detail='+localStorage.location_detail+'&version=p1',
-										 success: function(result) {
-												//alert (collection_date)
-												//alert (delivery_date)
-												//alert(result);
-												if (result==''){					
-													$("#errorChkVSubmit").html('Sorry Network not available');
-													$("#wait_image_visit_submit").hide();
-													$("#visit_submit").show();									
-												}else{					
-													var resultArray = result.split('<SYNCDATA>');			
-													if (resultArray[0]=='FAILED'){						
-														$("#errorChkVSubmit").html(resultArray[1]);
-														$("#wait_image_visit_submit").hide();
-														$("#visit_submit").show();	
-													}else if (resultArray[0]=='SUCCESS'){
-														
-														//-----------
-														localStorage.visit_client=''
-														localStorage.marchandizingStr=''
-														
-														localStorage.marketInfoLSCStr=''
-														
-														localStorage.marketInfoStr='';
-														localStorage.marketInfoSubmitStr='';
-														
-														localStorage.productOrderStr='';
-														localStorage.marchandizingInfoStr='';
-														localStorage.visit_camp_list_str='';
-														localStorage.visit_camp_submit_str='';
-														visitCampaginTempArray=[];
-														visitCampaginArray=[];
-														
-														localStorage.visit_page="";
-														
-														localStorage.show_total="";
-														
-														$("#chemist_feedback").val('')
-														
-														
-				
-														//-------------
-														// Clear localStorage
-															
-														localStorage.productOrderStr='';
-														cancel_cart();
-															
-				
-														//--------------------------------------------------------
-														$(".visit_client").html('');
-														
-														$("#errorChkVSubmit").html('');
-														$("#lat").val('');
-														$("#longitude").val('');
-														$("#lscPhoto").val('');
-														document.getElementById('myImage').src = '';
-														
-														$("#lat_p").val('');
-														$("#long_p").val('');								
-														
-														$("#checkLocation").html('');
-														$("#checkLocationProfileUpdate").html('');
-														
-														$("#wait_image_visit_submit").hide();
-														$("#visit_submit").show();
-														
-														$("#product_total_last").html('');
-														$("#product_list_tbl_cart").html('');
-														$("#product_total_cart").html('');
-														$("#item_combo_id").val('Search');
-														
-														
-														
-														//--
-														$("#visit_success").html('</br></br>Visit SL: '+resultArray[1]+'</br>Submitted Successfully');
-														
-														
-														$("#btn_location").show();	
-														$("#visit_submit").hide();
-														$("#checkLocation").hide('');	
-														
-														$("#delivery_date").val('');
-														$("#collection_date").val('');
-														
-														//$("#btn_location_doc").show();
-				//										$("#visit_submit_doc").hide();	
-				//										$("#checkLocation_doc").html('');
-				//										$("#wait_image_visit_submit_doc").hide('');
-														
-														
-														url = "#page_confirm_visit_success";	
-														$.mobile.navigate(url);
-														
-																								
-													}else{						
-														$("#errorChkVSubmit").html('Network Timeout. Please try again.');
-														$("#wait_image_visit_submit").hide();
-														$("#visit_submit").show();								
-														}
-												}
-											  },
-										  error: function(result) {			  
-												$("#errorChkVSubmit").html('Network Timeout. Please try again.');
-												$("#wait_image_visit_submit").hide();
-												$("#visit_submit").show();	
-										  }
-									 });//end ajax	
-								}
-							}
-						//  }//locaction check
+							
+						
+							
+							
+							
+										if (visitClientId=='' || visitClientId==undefined){
+											$("#errorChkVSubmit").html('Invalid Client');		
+										}else{
+											if(visit_type=='' || visit_type==undefined){
+												$("#errorChkVSubmit").html('Invalid Visit Type');
+											}else{
+												$("#visit_submit").hide();
+												$("#wait_image_visit_submit").show();		
+											//	alert (localStorage.productOrderStr);
+											//	$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&location_detail='+localStorage.location_detail+'&version=p1')
+												// ajax-------
+												//alert (localStorage.payment_mode);
+												$.ajax({
+													 type: 'POST',
+													 url: localStorage.base_url+'visitSubmit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&location_detail='+localStorage.location_detail+'&version=p1',
+													 success: function(result) {
+														//	alert (collection_date)
+														//	alert (delivery_date)
+														//	alert(result);
+															if (result==''){					
+																$("#errorChkVSubmit").html('Sorry Network not available');
+																$("#wait_image_visit_submit").hide();
+																$("#visit_submit").show();									
+															}else{					
+																var resultArray = result.split('<SYNCDATA>');			
+																if (resultArray[0]=='FAILED'){						
+																	$("#errorChkVSubmit").html(resultArray[1]);
+																	$("#wait_image_visit_submit").hide();
+																	$("#visit_submit").show();	
+																}else if (resultArray[0]=='SUCCESS'){
+																	
+															//		-----------
+																	localStorage.visit_client=''
+																	localStorage.marchandizingStr=''
+																	
+																	localStorage.marketInfoLSCStr=''
+																	
+																	localStorage.marketInfoStr='';
+																	localStorage.marketInfoSubmitStr='';
+																	
+																	localStorage.productOrderStr='';
+																	localStorage.marchandizingInfoStr='';
+																	localStorage.visit_camp_list_str='';
+																	localStorage.visit_camp_submit_str='';
+																	visitCampaginTempArray=[];
+																	visitCampaginArray=[];
+																	
+																	localStorage.visit_page="";
+																	
+																	localStorage.show_total="";
+																	
+																	$("#chemist_feedback").val('')
+																	
+																	
+							
+																	//-------------
+																	// Clear localStorage
+																		
+																	localStorage.productOrderStr='';
+																	cancel_cart();
+																		
+							
+																	//--------------------------------------------------------
+																	$(".visit_client").html('');
+																	
+																	$("#errorChkVSubmit").html('');
+																	$("#lat").val('');
+																	$("#longitude").val('');
+																	$("#lscPhoto").val('');
+																	document.getElementById('myImage').src = '';
+																	
+																	$("#lat_p").val('');
+																	$("#long_p").val('');								
+																	
+																	$("#checkLocation").html('');
+																	$("#checkLocationProfileUpdate").html('');
+																	
+																	$("#wait_image_visit_submit").hide();
+																	$("#visit_submit").show();
+																	
+																	$("#product_total_last").html('');
+																	$("#product_list_tbl_cart").html('');
+																	$("#product_total_cart").html('');
+																	$("#item_combo_id").val('Search');
+																	
+																	
+																	
+																	//--
+																	$("#visit_success").html('</br></br>Visit SL: '+resultArray[1]+'</br>Submitted Successfully');
+																	
+																	
+																	$("#btn_location").show();	
+																	$("#visit_submit").hide();
+																	$("#checkLocation").hide('');	
+																	
+																	$("#delivery_date").val('');
+																	$("#collection_date").val('');
+																	
+																	//$("#btn_location_doc").show();
+							//										$("#visit_submit_doc").hide();	
+																	$("#checkLocation_doc").html('');
+																	$("#wait_image_visit_submit_doc").hide('');
+																	
+																	
+																	url = "#page_confirm_visit_success";	
+																	$.mobile.navigate(url);
+																	
+																											
+																}else{						
+																	$("#errorChkVSubmit").html('Network Timeout. Please try again.');
+																	$("#wait_image_visit_submit").hide();
+																	$("#visit_submit").show();								
+																	}
+															}
+														  },
+													  error: function(result) {			  
+															$("#errorChkVSubmit").html('Network Timeout. Please try again.');
+															$("#wait_image_visit_submit").hide();
+															$("#visit_submit").show();	
+													  }
+												 });//end ajax	
+											}
+										}
+						
+						  }//locaction check
 					}
 		}//end collection and delivery date future
 	
@@ -4517,191 +4632,197 @@ function visitSubmit_doc(){
 		$("#errorChkVSubmit_doc").html('Visited with not selected');		
 	}else{
 		
-		if (lat=='' || lat==0 || longitude=='' || longitude==0){
-			lat=localStorage.latitude
-			longitude=localStorage.latitude
-			//$("#errorChkVSubmit_doc").html('Location not Confirmed');	
-//			$("#btn_location_doc").show();	
-//			$("#visit_submit_doc").show();	
-		}//else{
-			
-			if (visitClientId=='' || visitClientId==undefined){
-				$("#errorChkVSubmit_doc").html('Invalid Client');		
-			}else{
-				if(visit_type=='' || visit_type==undefined){
-					$("#errorChkVSubmit_doc").html('Invalid Visit Type');
-				}else{
-					$("#visit_submit_doc").hide();
-					$("#wait_image_visit_submit_doc").show();		
-					//alert (localStorage.productOrderStr);
-					var marketNameId=localStorage.visit_market_show.split('|');
-					var market_Id=marketNameId[1];		
-					
-					
-					//$("#errorChkVSubmit").html(msg1);
-					
-				// $("#errorChkVSubmit_doc").html(localStorage.base_url+'doctor_visit_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id)
-					// ajax-------
-					//alert (localStorage.payment_mode);
-					$.ajax({
-						 type: 'POST',
-						 url: localStorage.base_url+'doctor_visit_submit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id+'&location_detail='+localStorage.location_detail,
-						 success: function(result) {
+		if (lat=='' || lat==0 || longitude=='' || longitude==0 || localStorage.location_error==2){
+							
+								lat=localStorage.latitude
+								longitude=localStorage.latitude
+								localStorage.location_detail="LastLocation-"+localStorage.location_detail;
 								
-								//alert(result);
-								if (result==''){					
-									$("#errorChkVSubmit").html('Sorry Network not available');
-									$("#wait_image_visit_submit").hide();
-									$("#visit_submit").show();									
-								}else{					
-									var resultArray = result.split('<SYNCDATA>');			
-									if (resultArray[0]=='FAILED'){						
-										$("#errorChkVSubmit").html(resultArray[1]);
-										$("#wait_image_visit_submit").hide();
-										$("#visit_submit").show();	
-									}else if (resultArray[0]=='SUCCESS'){
-										
-										//-----------
-										localStorage.visit_client=''
-										
-									
-										
-										localStorage.visit_page=""
-										
-										localStorage.productGiftStr='';
-										localStorage.campaign_doc_str=''
-										localStorage.productSampleStr=''
-										localStorage.productppmStr=''
-										
-										localStorage.campaign_show_1='';
-										localStorage.gift_show_1='';
-										localStorage.sample_show_1='';
-										localStorage.ppm_show_1='';
+						
+							
+							
+							//$("#errorChkVSubmit").html('Location not Confirmed');	
+							//$("#btn_location").show();	
+							//$("#visit_submit").hide();	
+		}else{
+								
+								if (visitClientId=='' || visitClientId==undefined){
+									$("#errorChkVSubmit_doc").html('Invalid Client');		
+								}else{
+									if(visit_type=='' || visit_type==undefined){
+										$("#errorChkVSubmit_doc").html('Invalid Visit Type');
+									}else{
+										$("#visit_submit_doc").hide();
+										$("#wait_image_visit_submit_doc").show();		
+										//alert (localStorage.productOrderStr);
+										var marketNameId=localStorage.visit_market_show.split('|');
+										var market_Id=marketNameId[1];		
 										
 										
-										//-------------
-										// Clear Campaign and sample
-											
-											//localStorage.productOrderStr='';
-											var productList=localStorage.productListStr.split('<rd>');
-											var productLength=productList.length;
-											for ( i=0; i < productLength; i++){
-												var productArray2 = productList[i].split('<fd>');
-												var product_id2=productArray2[0];	
-												var product_name2=productArray2[1];
-												$("#sample_qty"+product_id2).val('');
-												
-												
-												var camp_combo="#doc_camp"+product_id2
-												$(camp_combo).attr('checked', false);
-												//alert (product_id2);
-											}	
-										// Clear Gift
-											
-											//localStorage.productOrderStr='';
-											var giftList=localStorage.gift_string.split('<rd>');
-											var giftLength=giftList.length;
-											for ( i=0; i < giftLength; i++){
-												var giftArray2 = giftList[i].split('<fd>');
-												var gift_id2=giftArray2[0];	
-												//var product_name2=giftArray2[1];
-												$("#gift_qty"+gift_id2).val('');
-											}
-											// Clear ppm
-											
-											//localStorage.productOrderStr='';
-											var ppmList=localStorage.ppm_string.split('<rd>');
-											var ppmLength=ppmList.length;
-											for ( i=0; i < ppmLength; i++){
-												var ppmArray2 = ppmList[i].split('<fd>');
-												var ppm_id2=ppmArray2[0];	
-												//var product_name2=ppmArray2[1];
-												$("#ppm_qty"+ppm_id2).val('');
-												
-
-											}	
-											
-											//====================================
+										//$("#errorChkVSubmit").html(msg1);
 										
-										
-										$("#doc_feedback").val('');
-										
-										//$(".market").html('');
-										$(".visit_client").html('');
-										//--------------------------------------------------------
-										$("#errorChkVSubmit").html('');
-										$("#lat").val('');
-										$("#longitude").val('');
-										$("#lscPhoto").val('');
-										document.getElementById('myImage').src = '';
-										
-										$("#lat_p").val('');
-										$("#long_p").val('');								
-//										
-										//$("#checkLocation").html('');
-//										$("#checkLocationProfileUpdate").html('');
-										
-										
-										
-										
-										
-										$("#errorChkVSubmit_doc").html('');
-										$("#wait_image_visit_submit_doc").hide();
-										$("#visit_submit_doc").hide();	
-										$("#checkLocation_doc").html('');
-										$("#btn_location_doc").show();
-										
-										
-										
-										//--
-										//$("#visit_success").html('</br></br>Visit SL: '+resultArray[1]+'</br>Submitted Successfully');
-										$("#visit_success").html('</br></br>Submitted Successfully');
-										localStorage.visit_page=''
-										
-										
-										
-										
-										/// CANCEL ALLcancelVisitPage();
-										
-											localStorage.campaign_show_1="";
-											localStorage.gift_show_1="";
-											localStorage.ppm_show_1=""
-											localStorage.sample_show_1="";
-											
-											
-											
-											localStorage.productGiftStr='';
-											localStorage.campaign_doc_str=''
-											localStorage.productSampleStr=''
-											localStorage.productppmStr='';
-											
-											set_doc_all();
-											$(".visit_client").html('');
-										
-										
-										
-										
-										var url = "#page_confirm_visit_success";	
-										$.mobile.navigate(url);
-										
-										//location.reload();
-																				
-									}else{						
-										$("#errorChkVSubmit_doc").html('Network Timeout. Please try again.');
-										$("#wait_image_visit_submit_doc").hide();
-										$("#visit_submit_doc").show();								
-										}
+									// $("#errorChkVSubmit_doc").html(localStorage.base_url+'doctor_visit_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id)
+										// ajax-------
+										//alert (localStorage.payment_mode);
+										$.ajax({
+											 type: 'POST',
+											 url: localStorage.base_url+'doctor_visit_submit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&msg='+msg+'&lat='+lat+'&long='+longitude+'&v_with='+v_with+'&route='+market_Id+'&location_detail='+localStorage.location_detail,
+											 success: function(result) {
+													
+													//alert(result);
+													if (result==''){					
+														$("#errorChkVSubmit").html('Sorry Network not available');
+														$("#wait_image_visit_submit").hide();
+														$("#visit_submit").show();									
+													}else{					
+														var resultArray = result.split('<SYNCDATA>');			
+														if (resultArray[0]=='FAILED'){						
+															$("#errorChkVSubmit").html(resultArray[1]);
+															$("#wait_image_visit_submit").hide();
+															$("#visit_submit").show();	
+														}else if (resultArray[0]=='SUCCESS'){
+															
+															//-----------
+															localStorage.visit_client=''
+															
+														
+															
+															localStorage.visit_page=""
+															
+															localStorage.productGiftStr='';
+															localStorage.campaign_doc_str=''
+															localStorage.productSampleStr=''
+															localStorage.productppmStr=''
+															
+															localStorage.campaign_show_1='';
+															localStorage.gift_show_1='';
+															localStorage.sample_show_1='';
+															localStorage.ppm_show_1='';
+															
+															
+															//-------------
+															// Clear Campaign and sample
+																
+																//localStorage.productOrderStr='';
+																var productList=localStorage.productListStr.split('<rd>');
+																var productLength=productList.length;
+																for ( i=0; i < productLength; i++){
+																	var productArray2 = productList[i].split('<fd>');
+																	var product_id2=productArray2[0];	
+																	var product_name2=productArray2[1];
+																	$("#sample_qty"+product_id2).val('');
+																	
+																	
+																	var camp_combo="#doc_camp"+product_id2
+																	$(camp_combo).attr('checked', false);
+																	//alert (product_id2);
+																}	
+															// Clear Gift
+																
+																//localStorage.productOrderStr='';
+																var giftList=localStorage.gift_string.split('<rd>');
+																var giftLength=giftList.length;
+																for ( i=0; i < giftLength; i++){
+																	var giftArray2 = giftList[i].split('<fd>');
+																	var gift_id2=giftArray2[0];	
+																	//var product_name2=giftArray2[1];
+																	$("#gift_qty"+gift_id2).val('');
+																}
+																// Clear ppm
+																
+																//localStorage.productOrderStr='';
+																var ppmList=localStorage.ppm_string.split('<rd>');
+																var ppmLength=ppmList.length;
+																for ( i=0; i < ppmLength; i++){
+																	var ppmArray2 = ppmList[i].split('<fd>');
+																	var ppm_id2=ppmArray2[0];	
+																	//var product_name2=ppmArray2[1];
+																	$("#ppm_qty"+ppm_id2).val('');
+																	
+					
+																}	
+																
+																//====================================
+															
+															
+															$("#doc_feedback").val('');
+															
+															//$(".market").html('');
+															$(".visit_client").html('');
+															//--------------------------------------------------------
+															$("#errorChkVSubmit").html('');
+															$("#lat").val('');
+															$("#longitude").val('');
+															$("#lscPhoto").val('');
+															document.getElementById('myImage').src = '';
+															
+															$("#lat_p").val('');
+															$("#long_p").val('');								
+					//										
+															//$("#checkLocation").html('');
+					//										$("#checkLocationProfileUpdate").html('');
+															
+															
+															
+															
+															
+															$("#errorChkVSubmit_doc").html('');
+															$("#wait_image_visit_submit_doc").hide();
+															$("#visit_submit_doc").hide();	
+															$("#checkLocation_doc").html('');
+															$("#btn_location_doc").show();
+															
+															
+															
+															//--
+															//$("#visit_success").html('</br></br>Visit SL: '+resultArray[1]+'</br>Submitted Successfully');
+															$("#visit_success").html('</br></br>Submitted Successfully');
+															localStorage.visit_page=''
+															
+															
+															
+															
+															/// CANCEL ALLcancelVisitPage();
+															
+																localStorage.campaign_show_1="";
+																localStorage.gift_show_1="";
+																localStorage.ppm_show_1=""
+																localStorage.sample_show_1="";
+																
+																
+																
+																localStorage.productGiftStr='';
+																localStorage.campaign_doc_str=''
+																localStorage.productSampleStr=''
+																localStorage.productppmStr='';
+																
+																set_doc_all();
+																$(".visit_client").html('');
+															
+															
+															
+															
+															var url = "#page_confirm_visit_success";	
+															$.mobile.navigate(url);
+															
+															//location.reload();
+																									
+														}else{						
+															$("#errorChkVSubmit_doc").html('Network Timeout. Please try again.');
+															$("#wait_image_visit_submit_doc").hide();
+															$("#visit_submit_doc").show();								
+															}
+													}
+												  },
+											  error: function(result) {			  
+													$("#errorChkVSubmit").html('Network Timeout. Please try again.');
+													$("#wait_image_visit_submit_doc").hide();
+													$("#visit_submit_doc").show();	
+											  }
+										 });//end ajax	
+									}
 								}
-							  },
-						  error: function(result) {			  
-								$("#errorChkVSubmit").html('Network Timeout. Please try again.');
-								$("#wait_image_visit_submit_doc").hide();
-								$("#visit_submit_doc").show();	
-						  }
-					 });//end ajax	
-				}
-			}
-		//  }//locaction check
+		  }//locaction check error
 	}//Visited with check
 	//}//image
   }
@@ -5128,23 +5249,7 @@ $(document).ready(function(){
 	$("#checkLocation_doc").html('');
 	$("#wait_image_visit_submit_doc").hide('');
 	
-	//$("#visit_submit").hide();
-	//alert (localStorage.visit_location)
-//	if (localStorage.visit_location!='YES'){
-//		$("#visit_location").hide();
-//		$("#visit_submit").show();
-//		
-//	}
-//	if (localStorage.delivery_date!='YES'){
-//		$("#delivery_date_div").hide();
-//	}
-//	if (localStorage.payment_date!='YES'){
-//		$("#payment_date_div").hide();
-//	}
-//	if (localStorage.payment_mode!='YES'){
-//		$("#payment_mode_div").hide();
-//	}
-	
+	getLocationInfo_ready();
 	
 	
 	client_catList();
