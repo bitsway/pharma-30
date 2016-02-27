@@ -72,7 +72,7 @@ function onSuccess(position) {
 } 
 function onError(error) {
 	
-	alert("Error while retrieving current position. Error code: " + error.code + ",Message: " + error.message);;
+	//alert("Error while retrieving current position. Error code: " + error.code + ",Message: " + error.message);;
 	
 	//alert(error.code);;
 	localStorage.location_error=error.code
