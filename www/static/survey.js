@@ -22,6 +22,12 @@ function getLocationInfo() { //location
 	
 	$("#checkLocation_doc").html('');
 	
+	
+	
+	$("#errorChkVSubmit").html('');
+	$("#errorConfiProfileUpdate").html('');
+	$("#errorChkVSubmit_doc").html('');
+	
 	var options = { enableHighAccuracy: true, timeout:15000};
 	//var options = { enableHighAccuracy: true, timeout:1000};
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
@@ -86,16 +92,16 @@ function onError(error) {
 	
 	$("#lat_p").val(0);
 	$("#long_p").val(0);
-	//localStorage.location_detail='';
+
 	if (localStorage.location_error==2){
-		$("#checkLocation").html(' <font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
-		$("#checkLocationProfileUpdate").html(' <font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
-		$("#checkLocation_doc").html(' <font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
-		//location_error=1
+		$("#checkLocation").html('<font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
+		$("#checkLocationProfileUpdate").html('<font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
+		$("#checkLocation_doc").html('<font style="color:#F00;">Please activate <font style="font-weight:bold">location </font> and <font style="font-weight:bold"> data </font></font>');
+
 	}else{
-	$("#checkLocation").html('Location not found. Last Location will submit.');
-	$("#checkLocationProfileUpdate").html('Location not found. Last Location will submit.');
-	$("#checkLocation_doc").html('Location not found. Last Location will submit.');
+		$("#checkLocation").html('Location can not be found. Last Location will be submitted.');
+		$("#checkLocationProfileUpdate").html('Location can not be found. Last Location will be submitted.');
+		$("#checkLocation_doc").html('Location can not be found. Last Location will be submitted.');
 	}
 	
 	
@@ -113,7 +119,7 @@ function onError(error) {
 //==Reload Location
 function getLocationInfo_ready() { //location
 	$("#wait_image_visit_submit").show()
-	$("#visit_submit").hide();
+	$("#visit_submit").show();
 	$("#btn_location").hide();
 	
 	$("#checkLocation").html(''); 
@@ -121,7 +127,7 @@ function getLocationInfo_ready() { //location
 	
 	
 	$("#wait_image_visit_submit_doc").show()
-	$("#visit_submit_doc").hide();
+	$("#visit_submit_doc").show();
 	$("#btn_location_doc").hide();
 	
 	$("#checkLocation_doc").html('');
@@ -1731,12 +1737,14 @@ function lscVisitSubmit(){
 		var diffDays_delivery = date2- date1; 
 		var diffDays_collection = date3 - date1; 
 		//alert (delivery_year)
-		if (delivery_year > year){
-			diffDays_delivery=diffDays_delivery * (-1)
-		}
-		if (collection_year > year){
-			diffDays_collection=diffDays_collection * (-1)
-		}
+		//if (delivery_year > year){
+//			diffDays_delivery=diffDays_delivery * (-1)
+//		}
+//		if (collection_year > year){
+//			alert (diffDays_collection)
+//			diffDays_collection=diffDays_collection * (-1)
+//			alert (diffDays_collection)
+//		}
 		//alert (diffDays_delivery)
 		//alert (date3)
 		//alert (diffDays_collection)
@@ -1864,6 +1872,19 @@ function lscVisitSubmit(){
 																	$("#visit_success").html('</br></br>Visit SL: '+resultArray[1]+'</br>Submitted Successfully');
 																	
 																	
+																	//saved data remove
+																	
+																	if (localStorage.saved_data_submit==1){
+																		var visit_save=localStorage.visit_save
+																		var saved_data_show=localStorage.saved_data_show;
+																		var visit_save_data=visit_save.replace(saved_data_show+"<rdrd>","")
+
+																		localStorage.visit_save=visit_save_data
+																		after_save_data();
+																		
+																	}
+																	
+																	
 																	$("#btn_location").show();	
 																	$("#visit_submit").hide();
 																	$("#checkLocation").hide('');	
@@ -1871,8 +1892,8 @@ function lscVisitSubmit(){
 																	$("#delivery_date").val('');
 																	$("#collection_date").val('');
 																	
-																	//$("#btn_location_doc").show();
-							//										$("#visit_submit_doc").hide();	
+
+							
 																	$("#checkLocation_doc").html('');
 																	$("#wait_image_visit_submit_doc").hide('');
 																	
@@ -4936,13 +4957,16 @@ function chemist_visit() {
 	localStorage.visit_page="NO";
 	addMarketList();
 	localStorage.saved_data_submit=0;
+	localStorage.save_submit=0;
 	
 }
 function saved_visit() {
 	localStorage.saved_data_submit=0;
+	
 	var url = "#page_saved_visit";
 	$.mobile.navigate(url);
 	getvisitSave_data();
+	
 }
 function chemist_profile() {
 	$("#ret_cat").show();
@@ -6493,6 +6517,8 @@ function set_save_data(i){
 	localStorage.saved_data_show = saved_data_show;
 	
 	
+	
+	
 	var saved_data_show_array=saved_data_show.split('<fdfd>')
 	
 	var market_name = saved_data_show_array[0];
@@ -6549,6 +6575,8 @@ function set_save_data(i){
 		$("#visit_submit").hide();
 		
 	}
+	$("#visit_submit").hide();
+	$("#btn_location").show();
 	if (localStorage.visit_location_flag!='YES'){
 		//alert (localStorage.visit_location);
 		$("#visit_location").hide();
