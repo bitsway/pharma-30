@@ -6190,7 +6190,7 @@ function summary_report_prescription() {
 							//	$("#err_retailer_date_next").text("");
 								
 								$("#report_header_prescription").text("Prescription Count");
-								$("#visit_count_prescription").html("<font style='font-size:15px; color:#666'>"+"visit Count:"+visit_count+"</font>");
+								$("#visit_count_prescription").html("<font style='font-size:15px; color:#666'>"+"Prescription Count:"+visit_count+"</font>");
 								//$("#visit_withAtt_prescription").html("<font style='font-size:15px; color:#666'>"+visit_areawise+"</font>");
 								//$("#visit_withoutAtt_prescription").html("<font style='font-size:15px; color:#666'>"+visit_repwise+"</font>");
 								
