@@ -12,14 +12,12 @@ function getLocationInfo() { //location
 	$("#visit_submit").hide();
 	$("#btn_location").hide();
 	
-	$("#checkLocation").html(''); 
-	$("#checkLocationProfileUpdate").html('');
+	
 	
 	
 	$("#wait_image_visit_submit_doc").show()
 	$("#visit_submit_doc").hide();
 	$("#btn_location_doc").hide();
-	
 	$("#checkLocation_doc").html('');
 	
 	
@@ -1491,7 +1489,7 @@ function getOrder_load(){
 	
 }
 function getOrder(){	
-	$("#errorChkVSubmit").html('');
+	//$("#errorChkVSubmit").html('');
 	var url = "#page_order";	
 	$.mobile.navigate(url);	
 
