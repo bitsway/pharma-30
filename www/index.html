@@ -163,6 +163,8 @@
 	  </div>
 		<div data-role="content" align="center">
         	<div id="visit_success" style="background-image:url(result_back.png); background-repeat:no-repea; width:300px; height:200px; color:#FFF; font-size:20px;"   align="center"></br></br></br>Submitted Successfully</div>
+            
+            
 
             
 			<br/>
@@ -170,7 +172,27 @@
 		</div>
 		
 		<div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CCC;" align="center" ></div>
-	</div>      
+	</div> 
+    
+  <!--  ======================-->
+    <div data-theme="c" data-role="page" id="page_confirm_visit_save" >
+		<div data-theme="c" data-role="header" data-position="fixed" >
+		<a data-role="button" href="#pageHome"  class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " onClick="clear_mgs()"><img src="menu.png"></a>
+			<h3>Success</h3>
+	  </div>
+		<div data-role="content" align="center">
+        	<div id="visit_save" style=" width:300px; height:200px; color:#FFF; font-size:20px;"   align="center"></br></br></br>Submitted Successfully</div>
+            
+            
+
+            
+			<br/>
+			<a data-role="button" href="#page_market_ret" >Another</a>
+		</div>
+		
+		<div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CCC;" align="center" ></div>
+	</div> 
+  <!--  ================================     -->
          
 <!--=====================Unschedule: market retailer Page==================-->
 		<div data-theme="c" data-role="page" id="page_market_ret">
@@ -1657,8 +1679,9 @@
             <br/>
             <br/>
             
+            <div id="visit_save_div">
              <a data-role="button" id="btn_visit_save" onClick="visitSave();"  >Save</a>
-            
+            </div>
 			
             
             

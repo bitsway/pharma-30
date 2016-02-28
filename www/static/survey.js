@@ -1647,6 +1647,8 @@ function replace_special_char(string_value){
 
 function lscVisitSubmit(){	
 	$("#errorChkVSubmit").text("");
+	$("#visit_save_div").hide();
+	
 	//alert (localStorage.location_detail)
 	var visitClientId=localStorage.visit_client
 	var visit_type=localStorage.visit_type
@@ -1898,13 +1900,14 @@ function lscVisitSubmit(){
 																	$("#checkLocation_doc").html('');
 																	$("#wait_image_visit_submit_doc").hide('');
 																	
-																	
+																	$("#visit_save_div").show();
 																	url = "#page_confirm_visit_success";	
 																	$.mobile.navigate(url);
 																	
 																											
 																}else{						
 																	$("#errorChkVSubmit").html('Network Timeout. Please try again.');
+																	$("#visit_save_div").show();
 																	$("#wait_image_visit_submit").hide();
 																	$("#visit_submit").show();								
 																	}
@@ -1913,6 +1916,7 @@ function lscVisitSubmit(){
 													  error: function(result) {			  
 															$("#errorChkVSubmit").html('Network Timeout. Please try again.');
 															$("#wait_image_visit_submit").hide();
+															$("#visit_save_div").show();
 															$("#visit_submit").show();	
 													  }
 												 });//end ajax	
@@ -6407,7 +6411,7 @@ function visitSave(){
 				}
 			}
 			
-					var url = "#page_confirm_visit_success";	
+					var url = "#page_confirm_visit_save";	
 					$.mobile.navigate(url);
 													
 																							
@@ -6478,7 +6482,7 @@ function after_save_data(){
 	
 	
 	//--
-	$("#visit_success").html('</br><font style="color:#B30059;font-weight:bold">Saved in your mobile. Please submit from saved order when you have good network. </font>');
+	$("#visit_save").html('</br><font style="color:#942342;">Saved in your mobile. Please submit from saved order when you have good network. </font>');
 	
 	
 	$("#btn_location").show();	
