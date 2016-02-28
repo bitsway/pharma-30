@@ -49,9 +49,7 @@ function onSuccess(position) {
 	
 	
 	
-	$("#errorChkVSubmit").html('');
-	$("#errorConfiProfileUpdate").html('');
-	$("#errorChkVSubmit_doc").html('');
+	
 	
 	
 	$("#checkLocation").html('Location Confirmed'); 
@@ -156,19 +154,19 @@ function onSuccess_ready(position) {
 	$("#errorChkVSubmit_doc").html('');
 	
 	
-	$("#checkLocation").html('Location Confirmed'); 
-	$("#checkLocationProfileUpdate").html('Location Confirmed');
+	//$("#checkLocation").html('Location Confirmed'); 
+	//$("#checkLocationProfileUpdate").html('Location Confirmed');
 		
 	
 	$("#wait_image_visit_submit").hide();
-	$("#visit_submit").show();
-	$("#btn_location").hide();
+	//$("#visit_submit").show();
+	//$("#btn_location").hide();
 	
-	$("#checkLocation_doc").html('Location Confirmed'); 
+	//$("#checkLocation_doc").html('Location Confirmed'); 
 
-	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").show();
-	$("#btn_location_doc").hide();
+	//$("#wait_image_visit_submit_doc").hide();
+	//$("#visit_submit_doc").show();
+	//$("#btn_location_doc").hide();
 	
 	codeLatLng(position.coords.latitude, position.coords.longitude)
 	
@@ -185,19 +183,19 @@ function onError_ready(error) {
 	$("#long_p").val(0);
 	//localStorage.location_detail='';
 	
-	$("#checkLocation").html('Location not found. Last Location will submit.');
-	$("#checkLocationProfileUpdate").html('Location not found. Last Location will submit.');
+	//$("#checkLocation").html('Location not found. Last Location will submit.');
+	//$("#checkLocationProfileUpdate").html('Location not found. Last Location will submit.');
 	
 	
 	
 	$("#wait_image_visit_submit").hide();
-	$("#visit_submit").show();
-	$("#btn_location").hide();
+	//$("#visit_submit").show();
+	//$("#btn_location").hide();
 	
-	$("#checkLocation_doc").html('Location not found. Last Location will submit.');
-	$("#wait_image_visit_submit_doc").hide();
-	$("#visit_submit_doc").show();
-	$("#btn_location_doc").hide();
+	//$("#checkLocation_doc").html('Location not found. Last Location will submit.');
+	//$("#wait_image_visit_submit_doc").hide();
+	//$("#visit_submit_doc").show();
+	//$("#btn_location_doc").hide();
 }
 
 
@@ -494,10 +492,10 @@ function check_user() {
 	//Main
 
 	
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-  var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+ // var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	
 	var user_id=$("#user_id").val();
@@ -1462,6 +1460,9 @@ function marketRetailerNext() {
 			
 			
 			
+			$("#errorChkVSubmit").html('');
+			$("#errorConfiProfileUpdate").html('');
+			$("#errorChkVSubmit_doc").html('');
 			
 			var url = "#page_visit";
 			$.mobile.navigate(url);
@@ -1611,7 +1612,9 @@ function getOrderData(){
 	}
 	else{
 		
-		
+		$("#errorChkVSubmit").html('');
+		$("#errorConfiProfileUpdate").html('');
+		$("#errorChkVSubmit_doc").html('');
 		var url = "#page_visit";	
 		$.mobile.navigate(url);
 	}
@@ -1880,7 +1883,7 @@ function lscVisitSubmit(){
 																		var visit_save_data=visit_save.replace(saved_data_show+"<rdrd>","")
 
 																		localStorage.visit_save=visit_save_data
-																		after_save_data();
+																		//after_save_data();
 																		
 																	}
 																	
@@ -3481,7 +3484,10 @@ function marketRetailerNext_doc() {
 		$("#unscheduled_m_client_combo_id_lv").show();
 		$("#wait_image_ret").hide();
 		
-
+		$("#errorChkVSubmit").html('');
+		$("#errorConfiProfileUpdate").html('');
+		$("#errorChkVSubmit_doc").html('');
+		
 		var url = "#page_visit_doc";
 		$.mobile.navigate(url);
 		
@@ -6474,7 +6480,7 @@ function after_save_data(){
 	
 	
 	//--
-	$("#visit_success").html('</br></br>'+'</br>Saved Successfully');
+	$("#visit_success").html('</br><font style="color:#FCADC5">Saved in your mobile. Please submit from saved order when you have good network. </font>');
 	
 	
 	$("#btn_location").show();	
@@ -6575,6 +6581,10 @@ function set_save_data(i){
 		$("#visit_submit").hide();
 		
 	}
+	
+	//$("#errorChkVSubmit").html('');
+//	$("#errorConfiProfileUpdate").html('');
+//	$("#errorChkVSubmit_doc").html('');
 	$("#visit_submit").hide();
 	$("#btn_location").show();
 	if (localStorage.visit_location_flag!='YES'){
@@ -6601,6 +6611,8 @@ function set_save_data(i){
 	localStorage.saved_data_submit=1;
 	localStorage.doctor_flag=0;
 	if (localStorage.productOrderStr==""){
+		//alert (localStorage.productOrderStr);
+		
 		var url = "#page_visit";
 	}
 	else{
