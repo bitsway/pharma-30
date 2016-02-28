@@ -6478,7 +6478,7 @@ function after_save_data(){
 	
 	
 	//--
-	$("#visit_success").html('</br><font style="color:#FCADC5">Saved in your mobile. Please submit from saved order when you have good network. </font>');
+	$("#visit_success").html('</br><font style="color:#B30059;font-weight:bold">Saved in your mobile. Please submit from saved order when you have good network. </font>');
 	
 	
 	$("#btn_location").show();	
