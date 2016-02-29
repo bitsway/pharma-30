@@ -1719,6 +1719,7 @@ function lscVisitSubmit(){
 	if  ((delivery_date.length < 10) || (collection_date.length < 10)){
 
 		$("#errorChkVSubmit").html('Please enter collection and delivery date');
+		$("#visit_save_div").show();
 	}
 	else{
 		var currentDate = new Date()
@@ -1789,7 +1790,8 @@ function lscVisitSubmit(){
 												$("#errorChkVSubmit").html('Invalid Visit Type');
 											}else{
 												$("#visit_submit").hide();
-												$("#wait_image_visit_submit").show();		
+												$("#wait_image_visit_submit").show();	
+												$("#visit_save_div").show();	
 											//	alert (localStorage.productOrderStr);
 											//	$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&location_detail='+localStorage.location_detail+'&version=p1')
 												// ajax-------
@@ -6506,7 +6508,7 @@ function getvisitSave_data(){
 		
 		localStorage.visit_market_show+'<fdfd>'+localStorage.visit_client_show
 			
-	   saved_data_list=saved_data_list+'<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="set_save_data('+i+')"  ><font style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+visit_client_show+'( '+visit_market_show+' )'+'</font></a></li>'
+	   saved_data_list=saved_data_list+'<table width="100%" border="0"><tr><td>'+'<a onClick="set_save_data('+i+')"  ><li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin;">'+'<font style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+visit_client_show+'( '+visit_market_show+' )'+'</li></a></td><td>' +'<input type="submit" onClick="cancelSave('+i+')" value="X"  >' +'</font>' +'</td> </tr></table>'
 	  // alert (client_id);
 														
 	}
@@ -6517,6 +6519,21 @@ function getvisitSave_data(){
 	saved_visit.listview("refresh");
 	//alert (client_id)												
 }
+
+
+function cancelSave(i){
+	var visit_save=localStorage.visit_save
+	var saved_data_show=visit_save.split('<rdrd>')[i];
+	var visit_save_data=visit_save.replace(saved_data_show+"<rdrd>","")
+
+	localStorage.visit_save=visit_save_data
+	after_save_data()
+	
+	saved_visit()
+}
+
+
+
 
 function set_save_data(i){
 	cancel_cart();
