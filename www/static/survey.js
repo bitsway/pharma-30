@@ -6508,7 +6508,7 @@ function getvisitSave_data(){
 		
 		localStorage.visit_market_show+'<fdfd>'+localStorage.visit_client_show
 			
-	   saved_data_list=saved_data_list+'<table width="100%" border="0"><tr><td width="60%">'+'<a onClick="set_save_data('+i+')"  ><li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin;">'+'<font style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+visit_client_show+'( '+visit_market_show+' )'+'</li></a></td><td>' +'<input type="submit" onClick="cancelSave('+i+')" value="X"  >' +'</font>' +'</td> </tr></table>'
+	   saved_data_list=saved_data_list+'<table width="100%" border="0"><tr><td width="60%">'+'<a onClick="set_save_data('+i+')"  ><li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin;">'+'<font style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+visit_client_show+'</br>( '+visit_market_show+' )'+'</li></a></td><td>' +'<input type="submit" onClick="cancelSave('+i+')" value="X"  >' +'</font>' +'</td> </tr></table>'
 	  // alert (client_id);
 														
 	}
