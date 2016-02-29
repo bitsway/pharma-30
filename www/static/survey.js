@@ -5012,6 +5012,13 @@ function doctor_profile() {
 	addMarketListCp();
 	
 }
+function stock() {
+	
+	getStock();
+	var url = "#page_stock";	
+	$.mobile.navigate(url);
+	
+}
 function feedback() {
 	localStorage.saved_data_submit=0;
 	getComplain();
@@ -5043,6 +5050,49 @@ function reports() {
 	
 	var url = "#page_reports_dcr";
 	$.mobile.navigate(url);
+}
+
+
+
+function getStock() {
+	
+	//$("#error_stock_page").html(localStorage.base_url+'stockInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
+	$.ajax({
+					 type: 'POST',
+					 url: localStorage.base_url+'stockInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode,
+					 success: function(result) {
+							 
+							if (result==''){					
+								$("#error_stock_page").html('Sorry Network not available');
+								
+								
+							}else{					
+								var resultArray = result.split('<SYNCDATA>');			
+								if (resultArray[0]=='FAILED'){						
+									$("#error_stock_page").html(resultArray[1]);
+									
+									
+								}else if (resultArray[0]=='SUCCESS'){								
+									//-----------
+									
+									$("#stock_div").html(resultArray[1]);
+									
+									
+
+									
+									//----
+												
+								}else{						
+									$("#error_stock_page").html('Network Timeout. Please try again.');
+									
+									}
+							}
+						  },
+					  error: function(result) {			  
+						  $("#error_stock_page").html('Network Timeout. Please try again.');
+						 
+					  }
+				 });//end ajax	
 }
 
 function market_list_combo() {	
