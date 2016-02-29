@@ -4975,6 +4975,7 @@ function saved_visit() {
 	
 	var url = "#page_saved_visit";
 	$.mobile.navigate(url);
+	//location.reload();
 	getvisitSave_data();
 	
 }
@@ -6558,7 +6559,7 @@ function getvisitSave_data(){
 		
 		localStorage.visit_market_show+'<fdfd>'+localStorage.visit_client_show
 			
-	   saved_data_list=saved_data_list+'<table width="100%" border="0"><tr><td width="60%">'+'<a onClick="set_save_data('+i+')"  ><li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin;">'+'<font style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+visit_client_show+'</br>( '+visit_market_show+' )'+'</li></a></td><td>' +'<input type="submit" onClick="cancelSave('+i+')" value="X"  >' +'</font>' +'</td> </tr></table>'
+	   saved_data_list=saved_data_list+'<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin;"><table width="100%" border="0"><tr><td width="80%">'+'<a onClick="set_save_data('+i+')"  >'+'<font style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+visit_client_show+'</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( '+visit_market_show+' )'+'</a></td><td>' +'<input type="submit" onClick="cancelSave('+i+')" value="X"  >' +'</font>' +'</td> </tr></table></li>'
 	  // alert (client_id);
 														
 	}
