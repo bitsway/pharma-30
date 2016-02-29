@@ -1754,6 +1754,7 @@ function lscVisitSubmit(){
 		//alert (diffDays_collection)
 		if  ((diffDays_delivery < 0 ) || (diffDays_collection < 0 )){
 			$("#errorChkVSubmit").html('Invalid collection and delivery date');
+			$("#visit_save_div").show();
 		}
 		else{
 					if (photoRequired=='Yes' && lscPhoto==''){
@@ -1791,7 +1792,7 @@ function lscVisitSubmit(){
 											}else{
 												$("#visit_submit").hide();
 												$("#wait_image_visit_submit").show();	
-												$("#visit_save_div").show();	
+												$("#visit_save_div").hide();	
 											//	alert (localStorage.productOrderStr);
 											//	$("#errorChkVSubmit").text(localStorage.base_url+'visitSubmit_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+longitude+'&visit_photo='+imageName+'&payment_mode='+localStorage.payment_mode+'&chemist_feedback='+chemist_feedback+'&delivery_date='+delivery_date+'&collection_date='+collection_date+'&location_detail='+localStorage.location_detail+'&version=p1')
 												// ajax-------
