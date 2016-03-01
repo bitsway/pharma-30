@@ -6330,7 +6330,7 @@ function detail_report_prescription() {
 								
 								
 								
-								$("#visit_count_prescription").html("visit Count:"+visit_count);
+								$("#visit_count_prescription").html("Prescription Count:"+visit_count);
 								
 //                              if (localStorage.user_type=='sup'){
 //									$("#visit_withAtt_prescription").html(visit_with_attribute);
