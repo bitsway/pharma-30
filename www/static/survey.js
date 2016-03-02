@@ -872,9 +872,9 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 													
 													
 													
-													$('#campaign_combo_id_lv').listview();
-													$('#sample_combo_id_lv').listview();
-													$('#item_combo_id_lv').listview();
+													//$('#campaign_combo_id_lv').listview();
+//													$('#sample_combo_id_lv').listview();
+//													$('#item_combo_id_lv').listview();
 													
 													
 													
