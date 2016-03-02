@@ -5404,9 +5404,9 @@ $(document).ready(function(){
 	
 	
 	
-	$('#campaign_combo_id_lv').listview();
-	$('#sample_combo_id_lv').listview();
-	$('#item_combo_id_lv').listview();
+	//$('#campaign_combo_id_lv').listview();
+//	$('#sample_combo_id_lv').listview();
+//	$('#item_combo_id_lv').listview();
 	
 	//Set total 
 	$("#product_total_cart").html(localStorage.show_total);
