@@ -490,7 +490,7 @@ function check_user() {
 	//Main
 
 	
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+//	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
@@ -819,15 +819,15 @@ localStorage.report_button='<a data-role="button" onClick="s_order_summary_repor
 														
 													
 													
-													var product_tbl_doc_campaign='<ul id="campaign_combo_id_lv" data-role="listview"  data-filter="true" data-input="#campaign_combo_id"  > ';
+													var product_tbl_doc_campaign='<ul id="campaign_combo_id_lv" data-role="listview"  data-filter="true" data-input="#campaign_combo_id"  data-inset="true" data-filter-reveal="true"> ';
 													
 													
 													
-													var product_tbl_doc_sample='<ul id="sample_combo_id_lv" data-role="listview"  data-filter="true" data-input="#sample_combo_id"  > ';
+													var product_tbl_doc_sample='<ul id="sample_combo_id_lv" data-role="listview"  data-filter="true" data-input="#sample_combo_id" data-inset="true" data-filter-reveal="true" > ';
 													
 													
 													
-													var product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" >'
+													var product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" data-inset="true" data-filter-reveal="true">'
 													
 													for (j=0; j < productLength; j++){
 														var productArray2 = productList[j].split('<fd>');
