@@ -6765,7 +6765,7 @@ function holidaySubmit() {
 
 	// ajax-------
 	if ((holiday!='') && (diffDays >= 0 )){
-		$("#error_holiday_page").html(localStorage.base_url+'holidayAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&holiday='+holiday);
+		//$("#error_holiday_page").html(localStorage.base_url+'holidayAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&holiday='+holiday);
 		// ajax-------
 				$.ajax({
 					 type: 'POST',
