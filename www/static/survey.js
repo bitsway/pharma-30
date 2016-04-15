@@ -5022,7 +5022,7 @@ function stock() {
 	
 }
 function holiday() {
-
+$("#error_holiday_page").val('');
 	//$("#error_holiday_page").html(localStorage.base_url+'holidayInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 	// ajax-------
 			$.ajax({
@@ -6744,6 +6744,8 @@ function set_save_data(i){
 //-----------------------------Visit Save End
 //========================Detail Report============
 function holidaySubmit() {	
+	
+	$("#error_holiday_page").val('');
 	var holiday=$("#holiday_date").val();
 	var currentDate = new Date()
 	var day = currentDate.getDate()
