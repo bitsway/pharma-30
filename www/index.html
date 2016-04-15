@@ -1723,7 +1723,39 @@
 			</div>
 		 </div><!--/page-->
     <!--========================Visit page rnd====================-->
-        
+     <!--====================Leav Entry================-->   
+
+		<div data-theme="c" data-role="page" id="page_holiday">
+            <div data-theme="c" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext" onClick="clear_mgs()"><img src="menu.png"></a>
+            <a data-role="button" data-rel="back"  data-iconpos="left" class="ui-btn-right"><img src="back.png"></a>
+                <h3>Holiday</h3>
+            </div>
+			
+            <div data-role="content">	
+            	<div id="error_holiday_page" style="color:#C00"></div>	
+                <table width="100%" border="0">
+                      <tr>
+                        <td width="70%"><input type="date" name="" id="holiday_date"  value="" placeholder="YYYY-MM-DD"></td>
+                        <td width="30%"><a data-role="button" id="btn_holiday" onClick="holidaySubmit();" > Submit </a>   </td>
+                      </tr>
+                    </table>
+
+                
+                	
+				<div id="holiday_div"> </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="c" data-role="footer" data-position="fixed"></div>
+			
+		 </div><!--/page-->   
+     
+     
+     
+     
+     
+     
         
 
     <script type="text/javascript" src="phonegap.js"></script>

@@ -5021,6 +5021,49 @@ function stock() {
 	$.mobile.navigate(url);
 	
 }
+function holiday() {
+
+	//$("#error_holiday_page").html(localStorage.base_url+'holidayInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+	// ajax-------
+			$.ajax({
+				 type: 'POST',
+				 url: localStorage.base_url+'holidayInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&holiday='+holiday,
+				 success: function(result) {
+						if (result==''){
+							$("#error_holiday_page").html('Sorry Network not available');
+						}else{					
+							var resultArray = result.split('<SYNCDATA>');			
+							if (resultArray[0]=='FAILED'){						
+								$("#error_holiday_page").html(resultArray[1]);								
+							
+							}else if (resultArray[0]=='SUCCESS'){
+														
+								var holiday_div=resultArray[1];
+																							
+								
+								$("#holiday_div").html(resultArray[1]);
+								
+								
+								
+							}else{						
+								$("#error_holiday_page").html('Network Timeout. Please try again.');
+								}
+						}
+					  },
+				  error: function(result) {			  
+					  $("#error_holiday_page").html('Network Timeout. Please try again.');		
+				  }
+			 });//end ajax
+
+
+
+
+
+var url = "#page_holiday";	
+$.mobile.navigate(url);
+	
+}
+
 function feedback() {
 	localStorage.saved_data_submit=0;
 	getComplain();
@@ -6699,3 +6742,66 @@ function set_save_data(i){
 
 
 //-----------------------------Visit Save End
+//========================Detail Report============
+function holidaySubmit() {	
+	var holiday=$("#holiday_date").val();
+	var currentDate = new Date()
+	var day = currentDate.getDate()
+	var month = currentDate.getMonth() + 1
+	var year = currentDate.getFullYear()
+	var today=  year + "/" + month + "/" + day
+	var holiday_check=holiday.replace('-','/')
+	
+	
+
+	var date1 = new Date(today);
+	var date2 = new Date(holiday_check);
+ 
+	var diffDays = date2- date1; 
+	
+	//alert (diffDays)
+
+	// ajax-------
+	if ((holiday!='') && (diffDays >= 0 )){
+		$("#error_holiday_page").html(localStorage.base_url+'holidayAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&holiday='+holiday);
+		// ajax-------
+				$.ajax({
+					 type: 'POST',
+					 url: localStorage.base_url+'holidayAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&holiday='+holiday,
+					 success: function(result) {
+							if (result==''){
+								$("#error_holiday_page").html('Sorry Network not available');
+							}else{					
+								var resultArray = result.split('<SYNCDATA>');			
+								if (resultArray[0]=='FAILED'){						
+									$("#error_holiday_page").html(resultArray[1]);								
+								
+								}else if (resultArray[0]=='SUCCESS'){
+															
+									var holiday_div=resultArray[1];
+																								
+									$("#error_holiday_page").html(holiday_div);
+									$("#holiday_div").html(resultArray[2]);
+									
+									
+									
+								}else{						
+									$("#error_holiday_page").html('Network Timeout. Please try again.');
+									}
+							}
+						  },
+					  error: function(result) {			  
+						  $("#error_holiday_page").html('Network Timeout. Please try again.');		
+					  }
+				 });//end ajax
+	
+	}
+	else{
+		 $("#error_holiday_page").html('Select correct date');
+	}
+	
+	
+	
+	//var url = "#page_report_prescription";
+	//$.mobile.navigate(url);	
+}
