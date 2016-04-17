@@ -6799,7 +6799,7 @@ function holidaySubmit() {
 	
 	}
 	else{
-		 $("#error_holiday_page").html('Select correct date');
+		 $("#error_holiday_page").html('Back date entry not acceptable');
 	}
 	
 	
