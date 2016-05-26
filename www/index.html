@@ -1752,7 +1752,33 @@
 		 </div><!--/page-->   
      
      
-     
+  <!--====================Tour Entry================-->   
+
+		<div data-theme="c" data-role="page" id="page_tour">
+            <div data-theme="c" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext" onClick="clear_mgs()"><img src="menu.png"></a>
+            <a data-role="button" data-rel="back"  data-iconpos="left" class="ui-btn-right"><img src="back.png"></a>
+                <h3>Tour Entry</h3>
+            </div>
+			
+            <div data-role="content">	
+            	<div id="error_tour_page" style="color:#C00"></div>	
+                <table width="100%" border="0">
+                      <tr>
+                        <td width="70%"><input type="date" name="" id="tour_date"  value="" placeholder="YYYY-MM-DD"></td>
+                        <td width="30%"><a data-role="button" id="btn_tour" onClick="tourSubmit();" > Submit </a>   </td>
+                      </tr>
+                    </table>
+
+                
+                	
+				<div id="tour_div"> </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="c" data-role="footer" data-position="fixed"></div>
+			
+		 </div><!--/page-->  
      
      
      

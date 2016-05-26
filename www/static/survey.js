@@ -253,11 +253,11 @@ function set_confirm_page(){
 	$("#btn_location").show();
 	
 	
-	$("#lat").val(0);
-	$("#longitude").val(0);
+	//$("#lat").val(0);
+	//$("#longitude").val(0);
 	
-	$("#lat_p").val(0);
-	$("#long_p").val(0);
+	//$("#lat_p").val(0);
+	//$("#long_p").val(0);
 	$("#checkLocation").html('');
 	
 	
@@ -490,7 +490,7 @@ function check_user() {
 	//Main
 
 	
-//	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
   var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
@@ -5023,7 +5023,7 @@ function stock() {
 }
 function holiday() {
 $("#error_holiday_page").html('');
-	//$("#error_holiday_page").html(localStorage.base_url+'holidayInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+	$("#error_holiday_page").html(localStorage.base_url+'holidayInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 	// ajax-------
 			$.ajax({
 				 type: 'POST',
@@ -5046,12 +5046,12 @@ $("#error_holiday_page").html('');
 								
 								
 							}else{						
-								$("#error_holiday_page").html('Network Timeout. Please try again.');
+								//$("#error_holiday_page").html('Network Timeout. Please try again.');
 								}
 						}
 					  },
 				  error: function(result) {			  
-					  $("#error_holiday_page").html('Network Timeout. Please try again.');		
+					//  $("#error_holiday_page").html('Network Timeout. Please try again.');		
 				  }
 			 });//end ajax
 
@@ -5063,7 +5063,44 @@ var url = "#page_holiday";
 $.mobile.navigate(url);
 	
 }
+function tour() {
+$("#error_tour_page").html('');
+	//$("#error_tour_page").html(localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+	// ajax-------
+			$.ajax({
+				 type: 'POST',
+				 url: localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour,
+				 success: function(result) {
+						if (result==''){
+							$("#error_tour_page").html('Sorry Network not available');
+						}else{					
+							var resultArray = result.split('<SYNCDATA>');			
+							if (resultArray[0]=='FAILED'){						
+								$("#error_tour_page").html(resultArray[1]);								
+							
+							}else if (resultArray[0]=='SUCCESS'){
+														
+								var tour_div=resultArray[1];
+																							
+								
+								$("#tour_div").html(resultArray[1]);
+								
+								
+								
+							}else{						
+								$("#error_tour_page").html('Network Timeout. Please try again.');
+								}
+						}
+					  },
+				  error: function(result) {			  
+					  $("#error_tour_page").html('Network Timeout. Please try again.');		
+				  }
+			 });//end ajax
 
+var url = "#page_tour";	
+$.mobile.navigate(url);
+	
+}
 function feedback() {
 	localStorage.saved_data_submit=0;
 	getComplain();
@@ -6800,6 +6837,70 @@ function holidaySubmit() {
 	}
 	else{
 		 $("#error_holiday_page").html('Back date entry not acceptable');
+	}
+	
+	
+	
+	//var url = "#page_report_prescription";
+	//$.mobile.navigate(url);	
+}
+function tourSubmit() {	
+	
+	$("#error_tour_page").html('');
+	var tour=$("#tour_date").val();
+	var currentDate = new Date()
+	var day = currentDate.getDate()
+	var month = currentDate.getMonth() + 1
+	var year = currentDate.getFullYear()
+	var today=  year + "/" + month + "/" + day
+	var tour_check=tour.replace('-','/')
+	
+	
+
+	var date1 = new Date(today);
+	var date2 = new Date(tour_check);
+ 
+	var diffDays = date2- date1; 
+	
+	//alert (diffDays)
+
+	// ajax-------
+	if ((tour!='') && (diffDays >= 0 )){
+		//$("#error_tour_page").html(localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour);
+		// ajax-------
+				$.ajax({
+					 type: 'POST',
+					 url: localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour,
+					 success: function(result) {
+							if (result==''){
+								$("#error_tour_page").html('Sorry Network not available');
+							}else{					
+								var resultArray = result.split('<SYNCDATA>');			
+								if (resultArray[0]=='FAILED'){						
+									$("#error_tour_page").html(resultArray[1]);								
+								
+								}else if (resultArray[0]=='SUCCESS'){
+															
+									var tour_div=resultArray[1];
+																								
+									$("#error_tour_page").html(tour_div);
+									$("#tour_div").html(resultArray[2]);
+									
+									
+									
+								}else{						
+									$("#error_tour_page").html('Network Timeout. Please try again.');
+									}
+							}
+						  },
+					  error: function(result) {			  
+						  $("#error_tour_page").html('Network Timeout. Please try again.');		
+					  }
+				 });//end ajax
+	
+	}
+	else{
+		 $("#error_tour_page").html('Back date entry not acceptable');
 	}
 	
 	
