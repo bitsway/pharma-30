@@ -5023,7 +5023,7 @@ function stock() {
 }
 function holiday() {
 $("#error_holiday_page").html('');
-	$("#error_holiday_page").html(localStorage.base_url+'holidayInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+	//$("#error_holiday_page").html(localStorage.base_url+'holidayInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 	// ajax-------
 			$.ajax({
 				 type: 'POST',
