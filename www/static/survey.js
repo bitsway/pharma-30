@@ -5066,7 +5066,10 @@ $.mobile.navigate(url);
 function tour() {
 $("#error_tour_page").html('');
 	
-getLocationInfo();	//$("#error_tour_page").html(localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+getLocationInfo();	
+
+$("#wait_image_tour_submit").hide();
+//$("#error_tour_page").html(localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 	// ajax-------
 			$.ajax({
 				 type: 'POST',
@@ -6846,7 +6849,7 @@ function holidaySubmit() {
 	//$.mobile.navigate(url);	
 }
 function tourSubmit() {	
-	
+	$("#wait_image_tour_submit").show();
 	$("#error_tour_page").html('');
 	var tour=$("#tour_date").val();
 	var tour_planned=$("#tour_planned").val();
@@ -6874,6 +6877,7 @@ function tourSubmit() {
 					 type: 'POST',
 					 url: localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned,
 					 success: function(result) {
+						 	$("#wait_image_tour_submit").hide();
 							if (result==''){
 								$("#error_tour_page").html('Sorry Network not available');
 							}else{					
@@ -6911,7 +6915,7 @@ function tourSubmit() {
 	//$.mobile.navigate(url);	
 }
 function tourConfirm() {
-	
+	$("#wait_image_tour_submit").show();
 	
 	$("#error_tour_page").html('');
 	var latitude=$("#lat").val();
@@ -6941,6 +6945,7 @@ function tourConfirm() {
 					 type: 'POST',
 					 url: localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail,
 					 success: function(result) {
+						 	$("#wait_image_tour_submit").hide();
 							if (result==''){
 								$("#error_tour_page").html('Sorry Network not available');
 							}else{					
@@ -6966,7 +6971,7 @@ function tourConfirm() {
 	
 	}
 	else{
-		 $("#error_tour_page").html('Location can not confirm.Please try later.');
+		 $("#error_tour_page").html('Location can not be confirmed.Please try later.');
 	}
 	
 	
