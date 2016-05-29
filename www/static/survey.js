@@ -5065,7 +5065,8 @@ $.mobile.navigate(url);
 }
 function tour() {
 $("#error_tour_page").html('');
-	//$("#error_tour_page").html(localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
+	
+getLocationInfo();	//$("#error_tour_page").html(localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 	// ajax-------
 			$.ajax({
 				 type: 'POST',
@@ -6911,7 +6912,7 @@ function tourSubmit() {
 }
 function tourConfirm() {
 	
-	getLocationInfo();
+	
 	$("#error_tour_page").html('');
 	var latitude=$("#lat").val();
 	var longitude=$("#longitude").val();
