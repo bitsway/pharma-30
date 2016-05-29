@@ -6951,6 +6951,7 @@ function tourConfirm() {
 								}else if (resultArray[0]=='SUCCESS'){																								
 									$("#error_tour_page").html(resultArray[1]);
 									var tour_div=resultArray[2];
+									$("#tour_div").html(tour_div);
 
 								}else{						
 									$("#error_tour_page").html('Network Timeout. Please try again.');
