@@ -6899,13 +6899,15 @@ function tourSubmit() {
 									}
 							}
 						  },
-					  error: function(result) {			  
+					  error: function(result) {		
+					  	  $("#wait_image_tour_submit").hide();	  
 						  $("#error_tour_page").html('Network Timeout. Please try again.');		
 					  }
 				 });//end ajax
 	
 	}
 	else{
+		 $("#wait_image_tour_submit").hide();
 		 $("#error_tour_page").html('Back date entry not acceptable');
 	}
 	
@@ -6964,13 +6966,15 @@ function tourConfirm() {
 									}
 							}
 						  },
-					  error: function(result) {			  
+					  error: function(result) {		
+					  	  $("#wait_image_tour_submit").hide();	  
 						  $("#error_tour_page").html('Network Timeout. Please try again.');		
 					  }
 				 });//end ajax
 	
 	}
 	else{
+		 $("#wait_image_tour_submit").hide();	
 		 $("#error_tour_page").html('Location can not be confirmed.Please try later.');
 	}
 	
