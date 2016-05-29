@@ -5069,7 +5069,7 @@ $("#error_tour_page").html('');
 	// ajax-------
 			$.ajax({
 				 type: 'POST',
-				 url: localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour,
+				 url: localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode,
 				 success: function(result) {
 						if (result==''){
 							$("#error_tour_page").html('Sorry Network not available');
@@ -5088,12 +5088,12 @@ $("#error_tour_page").html('');
 								
 								
 							}else{						
-								$("#error_tour_page").html('Network Timeout. Please try again.');
+							//	$("#error_tour_page").html('Network Timeout. Please try again.');
 								}
 						}
 					  },
 				  error: function(result) {			  
-					  $("#error_tour_page").html('Network Timeout. Please try again.');		
+					//  $("#error_tour_page").html('Network Timeout. Please try again.');		
 				  }
 			 });//end ajax
 
@@ -6848,6 +6848,7 @@ function tourSubmit() {
 	
 	$("#error_tour_page").html('');
 	var tour=$("#tour_date").val();
+	var tour_planned=$("#tour_planned").val();
 	var currentDate = new Date()
 	var day = currentDate.getDate()
 	var month = currentDate.getMonth() + 1
@@ -6866,11 +6867,11 @@ function tourSubmit() {
 
 	// ajax-------
 	if ((tour!='') && (diffDays >= 0 )){
-		//$("#error_tour_page").html(localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour);
+		//$("#error_tour_page").html(localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned);
 		// ajax-------
 				$.ajax({
 					 type: 'POST',
-					 url: localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour,
+					 url: localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned,
 					 success: function(result) {
 							if (result==''){
 								$("#error_tour_page").html('Sorry Network not available');
@@ -6883,11 +6884,72 @@ function tourSubmit() {
 															
 									var tour_div=resultArray[1];
 																								
-									$("#error_tour_page").html(tour_div);
-									$("#tour_div").html(resultArray[2]);
+									$("#error_tour_page").html("Submitted Successfully");
+									$("#tour_div").html(tour_div);
 									
 									
 									
+								}else{						
+									$("#error_tour_page").html('Network Timeout. Please try again.');
+									}
+							}
+						  },
+					  error: function(result) {			  
+						  $("#error_tour_page").html('Network Timeout. Please try again.');		
+					  }
+				 });//end ajax
+	
+	}
+	else{
+		 $("#error_tour_page").html('Back date entry not acceptable');
+	}
+	
+	
+	
+	//var url = "#page_report_prescription";
+	//$.mobile.navigate(url);	
+}
+function tourConfirm() {
+	
+	getLocationInfo();
+	$("#error_tour_page").html('');
+	var latitude=$("#lat").val();
+	var longitude=$("#longitude").val();
+	var error_flag=0;
+	if (lat=='' || lat==0 || longitude=='' || longitude==0 ){
+		error_flag=1;
+		$("#error_tour_page").html('Location can not confirm.Please try later.');
+		
+	}
+	else{
+		lat=lat
+		longitude=longitude
+		localStorage.location_detail="LastLocation-"+localStorage.location_detail;
+	}
+	
+	
+
+
+	//alert (error_flag)
+
+	// ajax-------
+	if (error_flag==0){
+		//$("#error_tour_page").html(localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail);
+		// ajax-------
+				$.ajax({
+					 type: 'POST',
+					 url: localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail,
+					 success: function(result) {
+							if (result==''){
+								$("#error_tour_page").html('Sorry Network not available');
+							}else{					
+								var resultArray = result.split('<SYNCDATA>');			
+								if (resultArray[0]=='FAILED'){						
+									$("#error_tour_page").html(resultArray[1]);								
+								
+								}else if (resultArray[0]=='SUCCESS'){																								
+									$("#error_tour_page").html(resultArray[1]);
+
 								}else{						
 									$("#error_tour_page").html('Network Timeout. Please try again.');
 									}
