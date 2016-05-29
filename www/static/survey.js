@@ -6922,7 +6922,7 @@ function tourConfirm() {
 		
 	}
 	else{
-		lat=lat
+		latitude=latitude
 		longitude=longitude
 		localStorage.location_detail="LastLocation-"+localStorage.location_detail;
 	}
@@ -6934,7 +6934,7 @@ function tourConfirm() {
 
 	// ajax-------
 	if (error_flag==0){
-		//$("#error_tour_page").html(localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail);
+//$("#error_tour_page").html(localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail);
 		// ajax-------
 				$.ajax({
 					 type: 'POST',
@@ -6962,7 +6962,7 @@ function tourConfirm() {
 	
 	}
 	else{
-		 $("#error_tour_page").html('Back date entry not acceptable');
+		 $("#error_tour_page").html('Location can not confirm.Please try later.');
 	}
 	
 	
