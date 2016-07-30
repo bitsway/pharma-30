@@ -5063,11 +5063,23 @@ var url = "#page_holiday";
 $.mobile.navigate(url);
 	
 }
+function teritoryCombo(){
+	var trStr=localStorage.marketListStr
+	var trList = trStr.split('<rd>');		
+	tour_combo_str=''
+	$('#teritoryCombo').empty();
+	for ( i=0; i < trList.length; i++){
+		var trSingleList = trList[i].split('<fd>');
+		tour_combo_str=tour_combo_str+'<option value="'+trSingleList[0]+'">'+trSingleList[1]+'</option>'
+	}
+	$('#teritoryCombo').append(tour_combo_str);
+}
 function tour() {
 $("#error_tour_page").html('');
 	
 getLocationInfo();	
-
+teritoryCombo()
+//alert (localStorage.marketListStr);
 $("#wait_image_tour_submit").hide();
 //$("#error_tour_page").html(localStorage.base_url+'tourInfo?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 	// ajax-------
@@ -6848,11 +6860,87 @@ function holidaySubmit() {
 	//var url = "#page_report_prescription";
 	//$.mobile.navigate(url);	
 }
+function tourThis() {	
+//alert ('Nadira')
+//$("#error_tour_page").html(localStorage.base_url+'tourMonth?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour=This');
+$.ajax({
+	 type: 'POST',
+	 url: localStorage.base_url+'tourMonth?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour=This',
+	 success: function(result) {
+			$("#wait_image_tour_submit").hide();
+			if (result==''){
+				$("#error_tour_page").html('Sorry Network not available');
+			}else{					
+				var resultArray = result.split('<SYNCDATA>');			
+				if (resultArray[0]=='FAILED'){						
+					$("#error_tour_page").html(resultArray[1]);								
+				
+				}else if (resultArray[0]=='SUCCESS'){
+											
+					var tour_div=resultArray[1];
+					//alert (tour_div)															
+					$("#error_tour_page").html("");
+					$("#tour_div").html(tour_div);
+					
+					
+					
+				}else{						
+					$("#error_tour_page").html('Network Timeout. Please try again.');
+					}
+			}
+		  },
+	  error: function(result) {		
+		  $("#wait_image_tour_submit").hide();	  
+		  $("#error_tour_page").html('Network Timeout. Please try again.');		
+	  }
+ });//end ajax
+	
+
+}
+function tourNext() {	
+//alert ('Nadira')
+//$("#error_tour_page").html(localStorage.base_url+'tourMonth?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour=This');
+$.ajax({
+	 type: 'POST',
+	 url: localStorage.base_url+'tourMonth?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour=Next',
+	 success: function(result) {
+			$("#wait_image_tour_submit").hide();
+			if (result==''){
+				$("#error_tour_page").html('Sorry Network not available');
+			}else{					
+				var resultArray = result.split('<SYNCDATA>');			
+				if (resultArray[0]=='FAILED'){						
+					$("#error_tour_page").html(resultArray[1]);								
+				
+				}else if (resultArray[0]=='SUCCESS'){
+											
+					var tour_div=resultArray[1];
+					//alert (tour_div)															
+					$("#error_tour_page").html("");
+					$("#tour_div").html(tour_div);
+					
+					
+					
+				}else{						
+					$("#error_tour_page").html('Network Timeout. Please try again.');
+					}
+			}
+		  },
+	  error: function(result) {		
+		  $("#wait_image_tour_submit").hide();	  
+		  $("#error_tour_page").html('Network Timeout. Please try again.');		
+	  }
+ });//end ajax
+	
+
+}
 function tourSubmit() {	
+	teritoryCombo()
 	$("#wait_image_tour_submit").show();
 	$("#error_tour_page").html('');
 	var tour=$("#tour_date").val();
 	var tour_planned=$("#tour_planned").val();
+	var tour_tr=$("#teritoryCombo").val();
 	var currentDate = new Date()
 	var day = currentDate.getDate()
 	var month = currentDate.getMonth() + 1
@@ -6871,11 +6959,11 @@ function tourSubmit() {
 
 	// ajax-------
 	if ((tour!='') && (diffDays >= 0 )){
-		//$("#error_tour_page").html(localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned);
+		//$("#error_tour_page").html(localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned+'&tour_tr='+tour_tr);
 		// ajax-------
 				$.ajax({
 					 type: 'POST',
-					 url: localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned,
+					 url: localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned+'&tour_tr='+tour_tr,
 					 success: function(result) {
 						 	$("#wait_image_tour_submit").hide();
 							if (result==''){
