@@ -490,10 +490,10 @@ function check_user() {
 	//Main
 
 	
-	//var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	var  apipath_base_photo_dm='http://127.0.0.1:8000/mrepbiopharma/syncmobile_ofline_ppm_report_test_live_20150502/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	//var apipath_base_photo_dm='http://e2.businesssolutionapps.com/mrepbiopharma/syncmobile_ofline_ppm_report_test/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-  var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+ // var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_20150502/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	
 	
 	var user_id=$("#user_id").val();
@@ -6936,6 +6936,9 @@ $.ajax({
 }
 function tourSubmit() {	
 	teritoryCombo()
+	$("#wait_image_tour_submit").show();	
+	$("#btn_tour").hide();	
+	 
 	$("#wait_image_tour_submit").show();
 	$("#error_tour_page").html('');
 	var tour=$("#tour_date").val();
@@ -6965,7 +6968,9 @@ function tourSubmit() {
 					 type: 'POST',
 					 url: localStorage.base_url+'tourAdd?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&tour='+tour+'&tour_planned='+tour_planned+'&tour_tr='+tour_tr,
 					 success: function(result) {
+						 	
 						 	$("#wait_image_tour_submit").hide();
+							$("#btn_tour").show();	
 							if (result==''){
 								$("#error_tour_page").html('Sorry Network not available');
 							}else{					
@@ -6984,11 +6989,14 @@ function tourSubmit() {
 									
 								}else{						
 									$("#error_tour_page").html('Network Timeout. Please try again.');
+									 $("#wait_image_tour_submit").hide();
+									 $("#btn_tour").show();	
 									}
 							}
 						  },
 					  error: function(result) {		
-					  	  $("#wait_image_tour_submit").hide();	  
+					  	  $("#wait_image_tour_submit").hide();
+						  $("#btn_tour").show() ;
 						  $("#error_tour_page").html('Network Timeout. Please try again.');		
 					  }
 				 });//end ajax
@@ -6996,6 +7004,7 @@ function tourSubmit() {
 	}
 	else{
 		 $("#wait_image_tour_submit").hide();
+		 $("#btn_tour").show() ;
 		 $("#error_tour_page").html('Back date entry not acceptable');
 	}
 	
