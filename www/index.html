@@ -1768,7 +1768,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             </div>
 			
             <div data-role="content">	
-            	<div id="error_tour_page" style="color:#C00"></div>	
+            	
                 <table width="100%" border="0">
                       <tr>
                         <td width="30%">
@@ -1791,18 +1791,24 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                        </tr>
                        
                        <tr>  
-                        <td width="20%"><a data-role="button" id="btn_tour" onClick="tourSubmit();" > Submit </a>   </td>
+                        <td width="20%">
+                        	
+                        <font style="font-size:12px" color="#9A0539">Please ensure - your GPS / Location Service is ON</font>
+                        <a data-role="button" id="btn_tour" onClick="tourSubmit();" > Submit </a>   
+                        
+                        <div id="error_tour_page" style="color:#C00"></div>
+                        </td>
                       </tr>
                     </table>
-
+					<div align="center"><img id="wait_image_tour_submit" style="" width="50px;" src="loading.gif" alt=""></div>
                 
                 	
 				<div id="tour_div"> </div>
                 
 				</br></br></br></br></br>
-                 <div align="center"><img id="wait_image_tour_submit" style="" width="50px;" src="loading.gif" alt=""></div>			
-                 <font style="font-size:12px" color="#9A0539">Please ensure - your GPS / Location Service is ON</font>
-                <a data-role="button" id="btn_tour" onClick="tourConfirm();" > Confirm Tour </a>
+                 			
+                 
+               <!-- <a data-role="button" id="btn_tour" onClick="tourConfirm();" > Confirm Tour </a>-->
             </div><!--/cont-->
 			
 			<div data-theme="c" data-role="footer" data-position="fixed"></div>
