@@ -1793,17 +1793,24 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                        <tr>  
                         <td width="20%">
                         	
-                        <font style="font-size:12px" color="#9A0539">Please ensure - your GPS / Location Service is ON</font>
-                        <a data-role="button" id="btn_tour" onClick="tourSubmit();" > Submit </a>   
                         
-                        <div id="error_tour_page" style="color:#C00"></div>
+                        <a data-role="button" id="btn_tour" onClick="tourSubmit();" > Submit </a>
+                        <br><br>
+                        
+                        
+                       
                         </td>
                       </tr>
                     </table>
+                    
 					<div align="center"><img id="wait_image_tour_submit" style="" width="50px;" src="loading.gif" alt=""></div>
-                
-                	
-				<div id="tour_div"> </div>
+                 
+               
+               <div style="height:1; background-color:#999; font-size:1px">&nbsp;</div>  
+               <div id="error_tour_page" style="color:#C00"></div>
+               </br></br>
+               <font style="font-size:12px" color="#9A0539">Please ensure - your GPS / Location Service is ON</font> 	
+				<div id="tour_div" style="overflow:scroll"> </div>
                 
 				</br></br></br></br></br>
                  			
