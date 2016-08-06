@@ -6972,10 +6972,13 @@ $.ajax({
 }
 function tourDelete(sl) {	
 //$("#error_tour_page").html(localStorage.base_url+'tourDelete?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&toursl='+sl);
+
+$("#tour_div").hide();
 $.ajax({
 	 type: 'POST',
 	 url: localStorage.base_url+'tourDelete?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&toursl='+sl,
 	 success: function(result) {
+		    $("#tour_div").show();
 			$("#wait_image_tour_submit").hide();
 			if (result==''){
 				$("#error_tour_page").html('Sorry Network not available');
@@ -6998,12 +7001,13 @@ $.ajax({
 					}
 			}
 		  },
-	  error: function(result) {		
+	  error: function(result) {	
+	  	  $("#tour_div").show();	
 		  $("#wait_image_tour_submit").hide();	  
 		  $("#error_tour_page").html('Network Timeout. Please try again.');		
 	  }
  });//end ajax
-	
+
 
 }
 function tourSubmit() {	
@@ -7086,6 +7090,7 @@ function tourSubmit() {
 	//$.mobile.navigate(url);	
 }
 function tourConfirm(sl) {
+	$("#tour_div").hide();
 	$("#wait_image_tour_submit").show();
 	
 	$("#error_tour_page").html('');
@@ -7116,6 +7121,7 @@ function tourConfirm(sl) {
 					 type: 'POST',
 					 url: localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail+'&sl='+sl,
 					 success: function(result) {
+						 	$("#tour_div").show();
 						 	$("#wait_image_tour_submit").hide();
 							if (result==''){
 								$("#error_tour_page").html('Sorry Network not available');
@@ -7135,7 +7141,8 @@ function tourConfirm(sl) {
 									}
 							}
 						  },
-					  error: function(result) {		
+					  error: function(result) {	
+					  	  $("#tour_div").show();		
 					  	  $("#wait_image_tour_submit").hide();	  
 						  $("#error_tour_page").html('Network Timeout. Please try again.');		
 					  }
