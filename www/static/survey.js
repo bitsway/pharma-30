@@ -5113,6 +5113,8 @@ $("#wait_image_tour_submit").hide();
 				  }
 			 });//end ajax
 
+$("#btn_tour").show();
+$("#wait_image_tour_submit").hide();
 var url = "#page_tour";	
 $.mobile.navigate(url);
 	
