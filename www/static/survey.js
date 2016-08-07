@@ -7121,7 +7121,7 @@ function tourConfirm(sl) {
 		// ajax-------
 				$.ajax({
 					 type: 'POST',
-					 url: localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail+'&sl='+sl,
+					 url: localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+encodeURI(latitude)+'&longitude='+encodeURI(latitude)+'&location_detail='+encodeURI(localStorage.location_detail)+'&sl='+sl,
 					 success: function(result) {
 						 	$("#tour_div").show();
 						 	$("#wait_image_tour_submit").hide();
