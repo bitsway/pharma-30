@@ -5104,12 +5104,12 @@ $("#wait_image_tour_submit").hide();
 								
 								
 							}else{						
-							//	$("#error_tour_page").html('Network Timeout. Please try again.');
+								$("#error_tour_page").html('Network Timeout. Please try again.');
 								}
 						}
 					  },
 				  error: function(result) {			  
-					//  $("#error_tour_page").html('Network Timeout. Please try again.');		
+					  $("#error_tour_page").html('Network Timeout. Please try again.');		
 				  }
 			 });//end ajax
 
@@ -7117,7 +7117,7 @@ function tourConfirm(sl) {
 
 	// ajax-------
 	//if (error_flag==0){
-//$("#error_tour_page").html(localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+latitude+'&longitude='+latitude+'&location_detail='+localStorage.location_detail+'&sl='+sl);
+//$("#error_tour_page").html(localStorage.base_url+'tourConfirm?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&latitude='+encodeURI(latitude)+'&longitude='+encodeURI(latitude)+'&location_detail='+encodeURI(localStorage.location_detail)+'&sl='+sl);
 		// ajax-------
 				$.ajax({
 					 type: 'POST',
@@ -7157,7 +7157,5 @@ function tourConfirm(sl) {
 //	}
 	
 	
-	
-	//var url = "#page_report_prescription";
-	//$.mobile.navigate(url);	
+
 }
